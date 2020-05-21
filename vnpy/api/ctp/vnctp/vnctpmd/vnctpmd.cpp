@@ -1,23 +1,25 @@
 // vnctpmd.cpp : 定义 DLL 应用程序的导出函数。
-//
 
-#include "vnctpmd.h"
+#include "vnctpmd.h" //引入头文件
 
 
 ///-------------------------------------------------------------------------------------
 ///C++的回调函数将数据保存到队列中
+/// 和vnctpmd呈对应的关系：改写vnctpmd.h中的函数,使其放入队列中
 ///-------------------------------------------------------------------------------------
 
-void MdApi::OnFrontConnected()
-{
-	Task task = Task();
-	task.task_name = ONFRONTCONNECTED;
-	this->task_queue.push(task);
-};
 
-void MdApi::OnFrontDisconnected(int nReason)
+
+void MdApi::OnFrontConnected()          // 改写MdApi类中的OnFrontConnected()方法
 {
-	Task task = Task();
+	Task task = Task();                 //定义一个task数据类型
+	task.task_name = ONFRONTCONNECTED;  //
+	this ->task_queue.push(task);       //调用MdApi class的 task_queue属性
+}
+
+void MdApi::OnFrontDisconnected(int nReason)  // 改写MdApi类中的OnFrontDisconnected()方法
+{
+	Task task = Task();                       
 	task.task_name = ONFRONTDISCONNECTED;
 	task.task_id = nReason;
 	this->task_queue.push(task);
@@ -307,7 +309,7 @@ void MdApi::processFrontDisconnected(Task *task)
 
 void MdApi::processHeartBeatWarning(Task *task)
 {
-	gil_scoped_acquire acquire;
+	gil_scoped_acquire acquire; // python全局锁
 	this->onHeartBeatWarning(task->task_id);
 };
 
@@ -653,7 +655,7 @@ int MdApi::reqUserLogout(const dict &req, int reqid)
 
 
 ///-------------------------------------------------------------------------------------
-///Boost.Python封装
+///Pybind.Python封装；这里的封装使用了overrider目的是对异常进行捕捉
 ///-------------------------------------------------------------------------------------
 
 class PyMdApi: public MdApi
