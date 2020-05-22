@@ -5,7 +5,17 @@
 #include "uft4_UserApiDataType.h"
 
 
-
+typedef enum tagExchange_Type
+{
+	EXCHANGE_CFFEX = 0,	//�н���
+	EXCHANGE_SHFE,		//1������
+	EXCHANGE_DCE,		//2������
+	EXCHANGE_SSEOPT,	//3��֤��Ȩ
+	EXCHANGE_CZCE,		//4
+	EXCHANGE_SZSE,		//5����֤ȯ
+	EXCHANGE_SSE,		//6�Ϻ�֤ȯ
+	EXCHANGE_UNKNOWN,
+}E_EXCHANGE_TYPE;
 
 typedef struct tagUftFtdcInputOrderField
 {
