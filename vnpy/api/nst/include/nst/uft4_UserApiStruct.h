@@ -4,7 +4,7 @@
 #include "os_common.h"
 #include "uft4_UserApiDataType.h"
 
-
+ 
 
 
 typedef struct tagUftFtdcInputOrderField
@@ -76,7 +76,7 @@ typedef struct tagUftReqOrderInsertField
 {
 	CUftFtdcInputOrderField	Order;
 	int64_t						OrderRef;		//��������ʶ
-	uint8_t                     MaginCheck;//�����Ƿ���д���Żݡ�0��������Ƿ��Żݣ���1�����
+	uint8_t                     MaginCheck;     //�����Ƿ���д���Żݡ�0��������Ƿ��Żݣ���1�����
 } CUftReqOrderInsertField;
 
 
@@ -107,7 +107,6 @@ typedef struct tagUftRspnOrderInsertField
 	uint32_t					ExchangeTime;	// ������ʱ��
 	T_UFT_FtdcOrderSysIDType	OrderSysID;		//�������������
 	char						OrderStatus;	//����״̬
-	
 } CUftRspnOrderInsertField;//API EXPOSURE
 
 
@@ -198,20 +197,19 @@ typedef struct tagUftReqQueryOrderField
 {
 	T_UFT_FtdcInstrumentIDType	InstrumentID;	//��Լ���룻InstrumentID[0]Ϊ'\0'��ʾ������
 	int32_t						BeginTime;		//ί����ʼʱ�䣻Ϊ0��ʾ������
-	int32_t						EndTime;		//ί����ֹʱ�䣻Ϊ0��С��BeginTime��ʾ������
-	T_UFT_FtdcOrderSysIDType		OrderSysID;		//������������ţ�ΪOrderSysID[0]Ϊ'\0'��ʾ������
-	uint32_t					OrderIndex;		//���ر���������Ϊ0xFFFFFFFF��ʾ������
-	uint32_t					EntrustSenderID;//�ͻ��˱�����ţ�Ϊ0xFFFFFFFF��ʾ������
-	int64_t						OrderRef;		//�ͻ��˵�������ʶ��Ϊ-1��ʾ������
-	uint32_t					Position;		//��λ��������ָ����ҳ��ȡ�ü�¼�ż�֮��ļ�¼���״�����0������ʹ��Ӧ���е�Positionֵ
-	uint8_t						all_session_data;//Ϊ1��ʾ��ȡ���лỰ������		
+	int32_t						EndTime;		 //ί����ֹʱ�䣻Ϊ0��С��BeginTime��ʾ������
+	T_UFT_FtdcOrderSysIDType	OrderSysID;		 //������������ţ�ΪOrderSysID[0]Ϊ'\0'��ʾ������
+	uint32_t					OrderIndex;		 //���ر���������Ϊ0xFFFFFFFF��ʾ������
+	uint32_t					EntrustSenderID; //�ͻ��˱�����ţ�Ϊ0xFFFFFFFF��ʾ������
+	int64_t						OrderRef;		 //�ͻ��˵�������ʶ��Ϊ-1��ʾ������
+	uint32_t					Position;		  //��λ��������ָ����ҳ��ȡ�ü�¼�ż�֮��ļ�¼���״�����0������ʹ��Ӧ���е�Positionֵ
+	uint8_t						all_session_data;	//Ϊ1��ʾ��ȡ���лỰ������		
 
 } CUftReqQueryOrderField;
 
 //ί�в�ѯӦ��
 typedef struct tagUftAnsQueryOrderField
 {
-	
 	CUftFtdcInputOrderField	    Order;
 	int64_t						OrderRef;		//��������ʶ
 	char						MaginCheck;		// �Ƿ���д���Żݡ�0��������Ƿ��Żݣ���1�����
@@ -223,7 +221,6 @@ typedef struct tagUftAnsQueryOrderField
 	uint32_t					SenderID;
 	int32_t						ErrorID;
 	uint32_t					OrderIndex;
-	//֤ȯNST
 	char						StockCode[8];   //��Ʊ���룬��\0�������������Կո���
 	char						Direction;      //������־1��2��
 	char						EntrustType;    //ί������'0'�޼�ί�У�'1'�������ţ�'2'���ַ�����ʣ��ת�޼ۣ�'3'�м������ɽ�ʣ�೷����'4'�м�ȫ��ɽ�������'5'�м������嵵ȫ��ɽ�ʣ�೷��
@@ -241,11 +238,11 @@ typedef struct tagUftReqQueryTradeField
 	T_UFT_FtdcInstrumentIDType	InstrumentID;	//��Լ���룻InstrumentID[0]Ϊ'\0'��ʾ������
 	int32_t						BeginTime;		//�ɽ���ʼʱ�䣻Ϊ0��ʾ������
 	int32_t						EndTime;		//�ɽ���ֹʱ�䣻Ϊ0��С��BeginTime��ʾ������
-	T_UFT_FtdcOrderSysIDType		OrderSysID;		//������������ţ�ΪOrderSysID[0]Ϊ'\0'��ʾ������
+	T_UFT_FtdcOrderSysIDType	OrderSysID;		//������������ţ�ΪOrderSysID[0]Ϊ'\0'��ʾ������
 	uint32_t					OrderIndex;		//���ر���������Ϊ0xFFFFFFFF��ʾ������
 	int64_t						OrderRef;		//�ͻ��˵�������ʶ��Ϊ-1��ʾ������
 	uint32_t					Position;		//��λ��������ָ����ҳ��ȡ�ü�¼�ż�֮��ļ�¼���״�����0������ʹ��Ӧ���е�Positionֵ
-	uint8_t						all_session_data;//Ϊ1��ʾ��ȡ���лỰ������		
+	uint8_t						all_session_data; //Ϊ1��ʾ��ȡ���лỰ������		
 
 } CUftReqQueryTradeField;
 
@@ -258,7 +255,7 @@ typedef struct tagUftAnsQueryTradeField
 	double							fare;				// ������	
 	int64_t							OrderRef;			//��������ʶ
 	uint32_t						OrderIndex;			// �������ر�ʶ
-	T_UFT_FtdcTradeIDType			BusinessId;		// �ɽ����	HsChar32
+	T_UFT_FtdcTradeIDType			BusinessId;		    // �ɽ����	HsChar32
 	T_UFT_FtdcOrderSysIDType		OrderSysID;			// ������ţ�char[16], ����δ����
 	int8_t							session_id;			//�ỰID
 	char							Direction;          //������־
@@ -308,8 +305,6 @@ typedef struct tagUftRspErrorField
 	int64_t			OrderRef;			//��������ʶ
 	char			ErrorMsg[256];
 	uint32_t		SendID;
-	
-
 } CUftRspErrorField;
 
 
@@ -341,8 +336,7 @@ typedef struct tagUftRtnInstrumentStatusField
 
 typedef struct tagUftRspTest
 {
-	int32_t TimeDelay;
-	
+	int32_t TimeDelay;	
 }CUftRspTest;
 
 typedef struct tagUftRspUserLoginField
